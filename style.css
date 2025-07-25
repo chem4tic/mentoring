@@ -33,6 +33,17 @@ nav {
   padding: 1rem 2rem;
 }
 
+.nav-container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 2rem;
+}
+
 .nav-links a {
   color: white;
   margin: 0 1rem;
