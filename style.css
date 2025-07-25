@@ -67,7 +67,6 @@ nav {
 
 .lang-switcher a:hover {
   color: var(--accent);
-  text-decoration: underline;
 }
 
 section {
