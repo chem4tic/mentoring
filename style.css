@@ -47,6 +47,13 @@ nav {
   margin-left: 0.5rem;
 }
 
+.lang {
+  color: var(--light);
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+
 .lang-switcher a:hover {
   color: var(--accent);
   text-decoration: underline;
