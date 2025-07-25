@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1e2a38;
+      --light: #f4f6f8;
+      --accent: #3b82f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: var(--light);
+    }
+
+    header {
+      background-color: var(--navy);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    nav {
+      background: var(--navy);
+      text-align: center;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .offers ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    .reviews blockquote {
+      background: white;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-left: 5px solid var(--accent);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.75rem;
+      background-color: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: var(--navy);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Your Name</h1>
+    <p>Creative professional offering [your service]</p>
+  </header>
+
+  <nav>
+    <a href="#about">About Me</a>
+    <a href="#offers">Offers</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      Hello! I'm [Your Name], a passionate professional offering [short description of your work].
+      I help clients achieve results through creativity, strategy, and skill.
+    </p>
+  </section>
+
+  <section id="offers" class="offers">
+    <h2>What I Offer</h2>
+    <ul>
+      <li>Service 1 – short description</li>
+      <li>Service 2 – short description</li>
+      <li>Service 3 – short description</li>
+    </ul>
+  </section>
+
+  <section id="reviews" class="reviews">
+    <h2>Client Reviews</h2>
+    <blockquote>
+      "Working with [Your Name] was fantastic! Delivered beyond expectations." – Happy Client
+    </blockquote>
+    <blockquote>
+      "Highly professional and easy to work with. Would recommend!" – Satisfied Customer
+    </blockquote>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form action="mailto:your@email.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Your Name. All rights reserved.
+  </footer>
+
+</body>
+</html>
