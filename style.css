@@ -15,6 +15,22 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: var(--light);
+
+.lang-switcher {
+  text-align: right;
+  padding: 1rem 2rem;
+}
+
+.lang {
+  color: var(--navy);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.lang:hover {
+  color: var(--accent);
+}
+  
 }
 
 header {
@@ -103,19 +119,4 @@ footer {
   section {
     padding: 2rem 1rem;
   }
-
-.lang-switcher {
-  text-align: right;
-  padding: 1rem 2rem;
-}
-
-.lang {
-  color: var(--navy);
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.lang:hover {
-  color: var(--accent);
-}
 }
