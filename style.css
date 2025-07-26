@@ -24,56 +24,6 @@ header {
   text-align: center;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  background: var(--navy);
-  padding: 1rem 2rem;
-}
-
-.nav-container {
-  max-width: 900px;
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 0 2rem;
-}
-
-.nav-links a {
-  color: white;
-  margin: 0 1rem;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.lang-switcher a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  margin-left: 0.5rem;
-}
-
-.lang {
-  color: var(--light);
-  font-weight: bold;
-  text-decoration: none;
-  margin-left: 0.5rem;
-}
-
-.lang-switcher a:hover {
-  color: var(--accent);
-}
-
-/* Hamburger button */
-.menu-toggle {
-  display: none;
-}
-
 section {
   padding: 4rem 2rem;
   max-width: 900px;
@@ -128,6 +78,58 @@ footer {
   margin-top: 2rem;
 }
 
+/* Navigation bar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--navy);
+  padding: 1rem 2rem;
+}
+
+.nav-container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 2rem;
+}
+
+.nav-links a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.lang-switcher a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+
+.lang {
+  color: var(--light);
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+
+.lang-switcher a:hover {
+  color: var(--accent);
+}
+
+/* Hamburger button */
+.menu-toggle {
+  display: none;
+}
+
+/* Styles for mobile devices */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
@@ -147,10 +149,10 @@ footer {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 60px; /* Adjust based on nav height */
+    top: 60px;
     left: 0;
     width: 100%;
-    background-color: #333;
+    background-color: var(--light);
     padding: 10px 0;
   }
 
