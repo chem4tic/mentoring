@@ -72,11 +72,6 @@ nav {
 /* Hamburger button */
 .menu-toggle {
   display: none;
-  font-size: 1.8em;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
 }
 
 section {
@@ -141,6 +136,11 @@ footer {
 
   .menu-toggle {
     display: block;
+    font-size: 1.8em;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
   }
 
   .nav-links {
