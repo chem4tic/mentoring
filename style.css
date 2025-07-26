@@ -182,6 +182,7 @@ nav {
 
   .nav-container {
     flex-wrap: nowrap;
+    white-space: nowrap;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -190,5 +191,6 @@ nav {
     margin-top: 10px;
     text-align: center;
     width: 100%;
+    white-space: nowrap;
   }
 }
