@@ -69,6 +69,16 @@ nav {
   color: var(--accent);
 }
 
+/* Hamburger button */
+.menu-toggle {
+  display: none;
+  font-size: 1.8em;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
 section {
   padding: 4rem 2rem;
   max-width: 900px;
@@ -123,18 +133,45 @@ footer {
   margin-top: 2rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   nav {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .nav-links, .lang-switcher {
-    margin-top: 0.5rem;
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Adjust based on nav height */
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
   }
 
   .nav-links a {
     display: block;
-    margin: 0.5rem 0;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lang-switcher {
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
   }
 }
