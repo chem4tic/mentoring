@@ -106,6 +106,10 @@ nav {
   font-weight: 600;
 }
 
+.nav-links a:hover {
+  color: var(--accent);
+}
+
 .lang-switcher a {
   color: white;
   font-weight: bold;
