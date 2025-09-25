@@ -366,6 +366,199 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Contact Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #999;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: #333;
+        }
+
+        .contact-details p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .contact-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .consultation-cta {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            color: white;
+            margin-top: 1rem;
+        }
+
+        .consultation-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .consultation-cta p {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .consultation-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .consultation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive modal */
+        @media (max-width: 600px) {
+            .contact-modal {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -495,7 +688,97 @@
         </div>
     </section>
 
+    <!-- Contact Modal -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="contact-modal">
+            <button class="modal-close" onclick="closeContactModal()">&times;</button>
+            
+            <div class="modal-header">
+                <h2>Let's Connect!</h2>
+                <p>Ready to transform your career? Reach out using any of the methods below.</p>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p><a href="mailto:mentor@yourname.com" class="contact-link">mentor@yourname.com</a></p>
+                        <p>I respond within 24 hours</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h3>Phone / WhatsApp</h3>
+                        <p><a href="tel:+1234567890" class="contact-link">+1 (234) 567-8900</a></p>
+                        <p>Mon-Fri: 9AM-6PM EST</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-details">
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">linkedin.com/in/yourprofile</a></p>
+                        <p>Connect professionally</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <div class="contact-details">
+                        <h3>Discord</h3>
+                        <p><a href="#" class="contact-link">YourMentor#1234</a></p>
+                        <p>Quick questions & community</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📅</div>
+                    <div class="contact-details">
+                        <h3>Calendly</h3>
+                        <p><a href="https://calendly.com/yourname" class="contact-link" target="_blank">Schedule a call</a></p>
+                        <p>Book a time that works for you</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="consultation-cta">
+                <h3>🎯 Free 30-Minute Consultation</h3>
+                <p>Let's discuss your goals and create a personalized roadmap for your IT career transition</p>
+                <a href="mailto:mentor@yourname.com?subject=Free Consultation Request&body=Hi! I'm interested in learning more about your IT mentoring services and would like to schedule a free consultation." class="consultation-btn">Book Free Session</a>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Contact Modal Functions
+        function openContactModal() {
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeContactModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeContactModal();
+            }
+        });
+
         // Scroll animations
         const observerOptions = {
             threshold: 0.1,
@@ -514,17 +797,11 @@
             observer.observe(el);
         });
 
-        // Smooth scrolling for CTA buttons
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        // Update CTA buttons to open contact modal
+        document.querySelectorAll('a[href="#contact"], .cta-button, .cta-secondary').forEach(button => {
+            button.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                openContactModal();
             });
         });
 
