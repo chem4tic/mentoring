@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<!--
+  PAGE: "Communication" — public speaking / presence coaching. Same design system and structure
+  as the "Mentoring" career page (same layout, sections, and language system), but with its own
+  distinct palette inspired by a reference site the user shared — deep indigo navy as the base
+  (used for the hero, nav, and dark bookend sections), warm coral as the universal heading/accent
+  color, and a golden yellow reserved specifically for CTA buttons, on clean white/light sections
+  otherwise. A second service line from the same person.
+
+  PERSONALIZE BEFORE PUBLISHING — search for these markers:
+  1. "Your Name" / "YN"      → your real name and initials (nav, hero card, about, footer)
+  2. [email protected]         → your real contact email (Contact section, twice)
+  3. "Add your photo here" / about.photoPlaceholder → replace the placeholder with an <img>
+  4. Testimonial cards        → testimonials.q1/a1/q2/a2 in the translations object
+  5. Booking link             → the Contact button points to mailto:; swap for Calendly/Cal.com/etc.
+  6. Bio (about.lede/about.p2)→ reframes your IT background around communication/presenting;
+                                adjust if you'd rather lead with something else
+  7. Pricing                  → search "[Add price]" (EN) / "[Uzupełnij cenę]" (PL) in the
+                                pricing section and add your real rates, currency, and terms
+
+  LANGUAGE: auto-detects the visitor's browser language — defaults to Polish unless the browser
+  explicitly reports English — with a manual PL/EN toggle in the nav (PL on the left). The Polish
+  copy is a natural rewrite, not a literal translation. The manual choice is session-only (kept in
+  memory, not saved) — if you host this for real and want it remembered, add localStorage to
+  setLanguage().
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Find Your Voice: Public Speaking & Communication Coaching</title>
+<meta name="description" content="Communication and public speaking coaching for people who freeze up in meetings, presentations, and everyday conversations — practice in a space with no grade attached.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F0E9DC;
+    --paper-dim:#E6DBC7;
+    --paper-white:#F8F2E6;
+    --line:#D9CBB0;
+    --navy:#2C2B66;
+    --navy-deep:#211F52;
+    --coral:#E8836B;
+    --coral-light:#F0A18C;
+    --gold:#F5BA45;
+    --gold-light:#F8CB74;
+    --gold-dark:#895A08;
+    --periwinkle:#7C7FD9;
+    --ink-text:#26254A;
+    --ink-soft:#6E6D8C;
+    --text-on-navy:#FFFFFF;
+    --text-on-gold:#2C2B66;
+    --white:#FFFFFF;
+
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono:'IBM Plex Mono', 'Courier New', monospace;
+
+    --max-w:1120px;
+    --radius:6px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *, *::before, *::after{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-text);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:var(--font-display);
+    color:var(--coral);
+    margin:0 0 0.5em 0;
+    line-height:1.15;
+    font-weight:600;
+  }
+  h1{ font-size:clamp(2.2rem, 5vw, 3.6rem); font-weight:500; letter-spacing:-0.01em; }
+  h1 em{ color:var(--gold); font-style:italic; }
+  h2{ font-size:clamp(1.6rem, 3.2vw, 2.3rem); }
+  p{ margin:0 0 1em 0; }
+  a{ color:inherit; }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--gold-dark);
+    margin:0 0 0.9em 0;
+    display:flex;
+    align-items:center;
+    gap:0.6em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:1px;
+    background:var(--gold-dark);
+    display:inline-block;
+  }
+
+  .wrap{ max-width:var(--max-w); margin:0 auto; padding:0 28px; }
+
+  :focus-visible{ outline:2px solid var(--coral); outline-offset:3px; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(44,43,102,0.95);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .nav-inner{
+    position:relative;
+    max-width:var(--max-w); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; font-family:var(--font-display); font-weight:600; color:var(--text-on-navy); font-size:1.05rem; }
+  .brand-mark{
+    width:34px; height:34px; border-radius:50%;
+    border:1.5px solid var(--coral);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono); font-size:0.75rem; color:var(--coral); font-weight:500;
+  }
+  .nav-links{ display:flex; gap:26px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ text-decoration:none; font-size:0.94rem; color:var(--text-on-navy); border-bottom:1px solid transparent; padding-bottom:2px; transition:border-color 0.15s ease, color 0.15s ease; }
+  .nav-links a:hover{ border-color:var(--gold); color:var(--gold); }
+  .nav-right{ display:flex; align-items:center; gap:14px; }
+  .nav-cta{
+    font-family:var(--font-body); font-weight:600; font-size:0.9rem;
+    background:var(--coral); color:var(--text-on-gold);
+    padding:10px 18px; border-radius:4px; text-decoration:none;
+    white-space:nowrap;
+    transition:background 0.15s ease;
+  }
+  .nav-cta:hover{ background:var(--coral-light); }
+  .nav-toggle{ display:none; background:none; border:1px solid var(--text-on-navy); border-radius:4px; padding:10px 12px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .nav-toggle span{ display:block; width:20px; height:2px; background:var(--text-on-navy); margin:4px 0; }
+
+  .lang-switch{ display:flex; gap:2px; background:rgba(255,255,255,0.1); padding:3px; border-radius:999px; flex-shrink:0; }
+  .lang-btn{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em;
+    background:none; border:none; padding:6px 11px; border-radius:999px;
+    color:rgba(255,255,255,0.7); cursor:pointer; transition:all 0.15s ease;
+  }
+  .lang-btn:hover{ color:var(--coral); }
+  .lang-btn.active{ background:var(--coral); color:var(--navy); }
+
+  @media (max-width: 900px){
+    .nav-links{
+      position:fixed; left:0; right:0;
+      flex-direction:column; background:var(--navy);
+      padding:20px 28px; gap:16px; border-bottom:1px solid rgba(255,255,255,0.12);
+      display:none;
+      z-index:100;
+      max-height:calc(100vh - 64px);
+      overflow-y:auto;
+      box-shadow:0 16px 32px -20px rgba(0,0,0,0.4);
+    }
+    .nav-links.open{ display:flex; }
+    .nav-toggle{ display:block; }
+    .nav-cta{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:88px 0 60px;
+    background-color:var(--navy);
+    background-image:
+      radial-gradient(circle at 85% 5%, rgba(232,131,107,0.32), transparent 62%),
+      radial-gradient(circle at 5% 95%, rgba(124,127,217,0.16), transparent 45%);
+  }
+  .hero-inner{ max-width:720px; }
+  .hero-sub{ font-size:1.12rem; color:rgba(255,255,255,0.82); max-width:620px; }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-top:28px; }
+
+  .btn{ display:inline-block; padding:13px 24px; border-radius:4px; text-decoration:none; font-weight:600; font-size:0.96rem; transition:all 0.15s ease; border:1.5px solid transparent; cursor:pointer; }
+  .btn-primary{ background:var(--coral); color:var(--text-on-gold); }
+  .btn-primary:hover{ background:var(--coral-light); }
+  .btn-ghost{ border-color:rgba(255,255,255,0.6); color:var(--text-on-navy); }
+  .btn-ghost:hover{ background:var(--text-on-navy); color:var(--navy); border-color:var(--text-on-navy); }
+
+  /* ---------- TRANSLATE CARD (signature element) ---------- */
+  .translate-card{
+    margin:56px auto 0; max-width:var(--max-w);
+    background:var(--paper-white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 24px 48px -32px rgba(15,14,45,0.4);
+    padding:34px 30px 26px;
+    position:relative;
+  }
+  .stamp{
+    position:absolute; top:-16px; right:24px;
+    font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.05em;
+    background:var(--paper-white);
+    border:1.5px solid var(--gold-dark);
+    color:var(--gold-dark);
+    padding:6px 12px; border-radius:999px;
+    transform:rotate(-4deg);
+  }
+  .translate-row{ display:grid; grid-template-columns:1fr auto 1fr; gap:26px; align-items:start; }
+  .translate-divider{
+    width:1px; align-self:stretch;
+    background-image:repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
+  }
+  .col-label{
+    display:block; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.05em;
+    text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px;
+  }
+  .translate-col.translated .col-label{ color:var(--gold-dark); }
+  .translate-col p{ font-size:1.06rem; margin:0; min-height:84px; }
+  .translate-col.original p{ color:var(--ink-soft); font-style:italic; }
+  .translate-col.translated p{ color:var(--gold-dark); font-weight:500; }
+
+  .translate-tabs{ display:flex; gap:10px; flex-wrap:wrap; margin-top:26px; padding-top:20px; border-top:1px solid var(--line); }
+  .tab{
+    font-family:var(--font-mono); font-size:0.76rem; background:none;
+    border:1px solid var(--line); border-radius:999px; padding:7px 14px;
+    color:var(--ink-soft); cursor:pointer; transition:all 0.15s ease;
+  }
+  .tab:hover{ border-color:var(--gold-dark); color:var(--gold-dark); }
+  .tab.active{ background:var(--gold-dark); color:var(--text-on-navy); border-color:var(--gold-dark); }
+
+  @media (max-width:640px){
+    .translate-row{ grid-template-columns:1fr; }
+    .translate-divider{ width:auto; height:1px; background-image:repeating-linear-gradient(to right, var(--line) 0 6px, transparent 6px 12px); }
+    .translate-col p{ min-height:0; }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .section{ padding:88px 0; }
+  .section-alt{ background:var(--paper-dim); }
+  .section-dark{ background:var(--navy); color:var(--text-on-navy); }
+  .section-dark h2, .section-dark h3{ color:var(--coral); }
+  .section-dark .eyebrow{ color:var(--gold); }
+  .section-dark .eyebrow::before{ background:var(--gold); }
+  .hero .eyebrow{ color:var(--gold); }
+  .hero .eyebrow::before{ background:var(--gold); }
+  .section-head{ max-width:640px; margin-bottom:48px; }
+
+  /* who it's for */
+  .grid-3{ display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; }
+  @media (max-width:860px){ .grid-3{ grid-template-columns:1fr; } }
+  .for-card{
+    background:var(--paper-white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:32px 24px 28px; position:relative; text-align:center;
+    box-shadow:0 16px 32px -26px rgba(15,14,45,0.25);
+  }
+  .for-icon{
+    width:48px; height:48px; border-radius:50%;
+    border:1.5px solid var(--gold-dark); color:var(--gold-dark);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    margin:0 auto 18px;
+  }
+  .for-icon svg{ width:22px; height:22px; }
+  .for-card h3{ font-size:1.15rem; margin-bottom:10px; }
+  .for-card p{ color:var(--ink-soft); font-size:0.98rem; margin:0; }
+
+  /* about */
+  .about-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:start; }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; } }
+  .photo-placeholder{
+    aspect-ratio:4/5; border:1.5px dashed rgba(255,255,255,0.3); border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:var(--font-mono); font-size:0.85rem; color:rgba(255,255,255,0.55); padding:24px;
+  }
+  .about-text p{ color:rgba(255,255,255,0.82); }
+  .about-text .lede{ font-family:var(--font-display); font-size:1.28rem; color:var(--text-on-navy); font-weight:500; }
+
+  /* mid-page CTA banner */
+  .section-tight{ padding:28px 0; }
+  .mid-cta{
+    max-width:var(--max-w); margin:0 auto;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    border-radius:999px;
+    background:var(--coral);
+    padding:20px 32px;
+    text-decoration:none; cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .mid-cta:hover{ background:var(--coral-light); }
+  .mid-cta-text{ margin:0; color:var(--text-on-gold); font-size:0.98rem; font-weight:600; }
+  .mid-cta-text strong{ font-weight:700; }
+  @media (max-width:640px){
+    .mid-cta{ border-radius:var(--radius); padding:20px 24px; }
+  }
+
+  /* approach */
+  .approach-inner{ max-width:720px; }
+  .pull-quote{
+    font-family:var(--font-display); font-size:clamp(1.3rem,2.6vw,1.7rem);
+    color:var(--gold-dark); border-left:2px solid var(--gold-dark); padding-left:24px;
+    margin:34px 0; font-weight:500; font-style:italic;
+  }
+
+  /* how I help */
+  .steps{ display:flex; flex-direction:column; gap:0; max-width:760px; }
+  .step{
+    position:relative; overflow:hidden;
+    display:grid; grid-template-columns:56px 1fr; gap:24px; padding:28px 0; border-top:1px solid var(--line); align-items:start;
+  }
+  .step:last-child{ border-bottom:1px solid var(--line); }
+  .step > div{ position:relative; z-index:1; }
+  .step-bg-num{
+    position:absolute; top:0; right:0; bottom:0; left:0;
+    display:flex; align-items:center; justify-content:flex-end;
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(4.5rem, 11vw, 7.5rem);
+    line-height:1;
+    color:var(--gold-dark);
+    opacity:0.09;
+    z-index:0;
+    pointer-events:none;
+    user-select:none;
+  }
+  .step-icon{
+    width:48px; height:48px; border-radius:50%;
+    border:1.5px solid var(--gold-dark); color:var(--gold-dark);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .step-icon svg{ width:22px; height:22px; }
+  .step h3{ font-size:1.2rem; margin-bottom:8px; }
+  .step p{ color:var(--ink-soft); margin:0; }
+
+  /* pricing */
+  .pricing-grid{ align-items:stretch; }
+  .price-card{
+    background:var(--paper-white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px 26px; display:flex; flex-direction:column; position:relative;
+    transition:background 0.2s ease, border-color 0.2s ease;
+  }
+  .price-card.featured{ border:1.5px solid var(--coral); box-shadow:0 20px 40px -28px rgba(15,14,45,0.3); }
+  .price-badge{
+    position:absolute; top:-13px; left:26px;
+    font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.05em; text-transform:uppercase;
+    background:var(--coral); color:var(--text-on-gold); padding:5px 12px; border-radius:999px;
+  }
+  .price-card h3{ font-size:1.2rem; margin-bottom:6px; }
+  .price-tag{ font-family:var(--font-display); font-size:1.9rem; color:var(--coral); font-weight:600; margin:0; }
+  .price-meta{ font-family:var(--font-mono); font-size:0.78rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:16px; }
+  .price-card > p:not(.price-tag):not(.price-meta){ color:var(--ink-soft); font-size:0.96rem; }
+  .price-features{ list-style:none; margin:8px 0 24px 0; padding:0; flex-grow:1; }
+  .price-features li{
+    font-size:0.92rem; color:var(--ink-text); padding:9px 0 9px 22px; position:relative;
+    border-top:1px solid var(--line);
+  }
+  .price-features li:first-child{ border-top:none; }
+  .price-features li::before{ content:"→"; position:absolute; left:0; color:var(--gold-dark); font-weight:600; }
+  .price-btn{ text-align:center; width:100%; }
+
+  .price-card:hover{
+    background:var(--navy); border-color:var(--navy);
+  }
+  .price-card:hover h3,
+  .price-card:hover .price-tag{
+    color:var(--gold);
+  }
+  .price-card:hover .price-meta,
+  .price-card:hover > p:not(.price-tag):not(.price-meta),
+  .price-card:hover .price-features li{
+    color:var(--text-on-navy);
+  }
+  .price-card:hover .price-features li{
+    border-top-color:rgba(255,255,255,0.2);
+  }
+  .price-card:hover .price-features li::before{
+    color:var(--gold);
+  }
+
+  /* testimonials */
+  .testi-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+  @media (max-width:860px){ .testi-grid{ grid-template-columns:1fr; } }
+  .testi-card{ background:var(--paper-white); border:1px solid var(--line); border-radius:var(--radius); padding:26px 24px; }
+  .testi-quote{ font-size:1.02rem; color:var(--ink-text); margin-bottom:16px; }
+  .testi-attr{ font-family:var(--font-mono); font-size:0.78rem; color:var(--ink-soft); }
+
+  /* contact */
+  .contact-inner{ display:grid; grid-template-columns:1.2fr 1fr; gap:56px; align-items:center; }
+  @media (max-width:860px){ .contact-inner{ grid-template-columns:1fr; } }
+  .contact-card{
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18);
+    border-radius:var(--radius); padding:28px; font-family:var(--font-mono); font-size:0.92rem;
+  }
+  .contact-card a{ color:var(--gold); text-decoration:none; }
+  .contact-card a:hover{ text-decoration:underline; }
+  .contact-icon{ display:inline-flex; align-items:center; color:rgba(255,255,255,0.8); }
+  .contact-icon svg{ width:18px; height:18px; }
+  .contact-row{ display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid rgba(255,255,255,0.14); }
+  .contact-row:first-child{ border-top:none; }
+
+  /* footer */
+  footer{ background:var(--navy-deep); color:rgba(255,255,255,0.55); padding:28px 0; border-top:1px solid rgba(255,255,255,0.12); }
+  .footer-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.85rem; }
+  footer a{ color:rgba(255,255,255,0.7); text-decoration:none; }
+  footer a:hover{ color:var(--gold); }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top"><span class="brand-mark">YN</span>Your Name</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#for-you" data-i18n="nav.forYou">Who it's for</a>
+      <a href="#how" data-i18n="nav.how">How I help</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button type="button" class="lang-btn" data-lang="pl" aria-pressed="true">PL</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="nav-cta" href="#contact" data-i18n="nav.bookCall">Book a call</a>
+      <button type="button" class="nav-toggle" id="navToggle" data-i18n-aria="nav.menuLabel" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Communication coaching · practice, not performance</p>
+        <h1 data-i18n="hero.h1">You already have a voice worth hearing.<br>You just haven't had room to <em>practice</em> it.</h1>
+        <p class="hero-sub" data-i18n="hero.sub">I help people who freeze up in meetings, presentations, and everyday conversations — not because something's missing, but because the only practice most of us ever got was in a classroom, being judged and graded. Let's fix that, in a space where the only goal is to get comfortable.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact" data-i18n="hero.ctaPrimary">Book a free intro call</a>
+          <a class="btn btn-ghost" href="#how" data-i18n="hero.ctaSecondary">See how it works</a>
+        </div>
+      </div>
+
+      <div class="translate-card">
+        <span class="stamp" id="stampBadge">PRACTICED ✓</span>
+        <div class="translate-row">
+          <div class="translate-col original">
+            <span class="col-label" data-i18n="card.labelOriginal">What happens now</span>
+            <p id="originalText">Your heart races before a two-minute update in a team meeting, so you rush through it and forget half of what you meant to say.</p>
+          </div>
+          <div class="translate-divider" aria-hidden="true"></div>
+          <div class="translate-col translated">
+            <span class="col-label" id="translatedLabel">What practice changes</span>
+            <p id="translatedText">A steady two minutes — because you rehearsed it enough times that it stopped feeling like a performance.</p>
+          </div>
+        </div>
+        <div class="translate-tabs" role="tablist" data-i18n-aria="card.tabsAria" aria-label="Example speaking scenarios">
+          <button class="tab active" data-index="0" data-i18n="card.tab1">Team Meetings</button>
+          <button class="tab" data-index="1" data-i18n="card.tab2">Presenting to a Room</button>
+          <button class="tab" data-index="2" data-i18n="card.tab3">Speaking English</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section id="for-you" class="section reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="forYou.eyebrow">Sound familiar?</p>
+        <h2 data-i18n="forYou.h2">Who I work with</h2>
+      </div>
+      <div class="grid-3">
+        <div class="for-card">
+          <div class="for-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H9l-4 3.5v-3.5H4v-10z"/><line x1="10" y1="8.5" x2="10" y2="12.5"/><line x1="14" y1="8.5" x2="14" y2="12.5"/></svg>
+          </div>
+          <h3 data-i18n="forYou.c1h">You freeze when it's your turn to talk</h3>
+          <p data-i18n="forYou.c1p">In meetings, in group settings — the moment attention turns to you, your mind goes blank, even though you knew exactly what to say a minute ago.</p>
+        </div>
+        <div class="for-card">
+          <div class="for-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4.5" width="16" height="11" rx="1"/><path d="M8.5 11l2.5-2.5 2 2 3-3.5"/><line x1="12" y1="15.5" x2="12" y2="19"/><line x1="8.5" y1="19" x2="15.5" y2="19"/></svg>
+          </div>
+          <h3 data-i18n="forYou.c2h">You dread presenting</h3>
+          <p data-i18n="forYou.c2p">The material is solid and you know it cold — but the thought of standing in front of a room and saying it out loud keeps you up the night before.</p>
+        </div>
+        <div class="for-card">
+          <div class="for-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5h11v7.5H9l-2.5 2.2v-2.2H3.5V5z"/><path d="M10.5 9.5h10v6.5h-3v2.8L15 16h-4.5V9.5z"/></svg>
+          </div>
+          <h3 data-i18n="forYou.c3h">You know English, but freeze in English</h3>
+          <p data-i18n="forYou.c3p">You can read and write it just fine. Saying it out loud, in real time, in front of others, feels like an entirely different skill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section section-dark reveal">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="photo-placeholder" data-i18n="about.photoPlaceholder">Add your photo here<br>(square or 4:5, replace this box with an &lt;img&gt;)</div>
+        <div class="about-text">
+          <p class="eyebrow" data-i18n="about.eyebrow">Your guide</p>
+          <h2 data-i18n="about.h2">A decade of presenting to rooms that didn't speak my language</h2>
+          <p class="lede" data-i18n="about.lede">For more than ten years, I sat in rooms — with clients, with executives, with teams — explaining technical things to people with no technical background. That's its own kind of public speaking: constant, high-stakes, and with nowhere to hide.</p>
+          <p data-i18n="about.p2">Nobody teaches you how to do that well. I learned it the way most people do — badly, awkwardly, one presentation at a time — until it stopped feeling like a performance and started feeling like a conversation. That's exactly what I help other people build now: not a script, but the comfort that only comes from real, low-stakes practice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID-PAGE CTA -->
+  <section class="section section-tight reveal">
+    <div class="wrap">
+      <a class="mid-cta" href="#contact">
+        <span class="mid-cta-text" data-i18n="midCta.text"><strong>Not sure yet?</strong> Book a free, 20-minute intro call — no pressure.</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach" class="section section-alt reveal">
+    <div class="wrap">
+      <div class="approach-inner">
+        <p class="eyebrow" data-i18n="approach.eyebrow">The approach</p>
+        <h2 data-i18n="approach.h2">It was never about talent. It was about the room you practiced in.</h2>
+        <p data-i18n="approach.p1">Most people's only real public speaking practice happened in a classroom — graded, judged, compared to everyone else in the room. It's no wonder the fear stuck. That's not a fair training ground for a skill you need for the rest of your working life.</p>
+        <blockquote class="pull-quote" data-i18n="approach.quote">"You don't need to be a natural. You need a room where it's safe to be bad at this for a while."</blockquote>
+        <p data-i18n="approach.p2">That's what these sessions are: a low-stakes space to practice being seen and heard, with nothing riding on it. No grade, no audience waiting to catch a mistake — just repetition, in a room that's actually on your side.</p>
+        <p data-i18n="approach.p3">The goal isn't to turn you into a different person in front of a room. It's to make the room feel like the people you're already comfortable with.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW I HELP -->
+  <section id="how" class="section reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="how.eyebrow">The process</p>
+        <h2 data-i18n="how.h2">How I help</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-bg-num" aria-hidden="true">#1</span>
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H9l-4 3.5v-3.5H4v-10z"/><line x1="8" y1="9.5" x2="16" y2="9.5"/><line x1="8" y1="12.5" x2="13" y2="12.5"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="how.s1h">Discovery call</h3>
+            <p data-i18n="how.s1p">A free, 20-minute conversation about what specifically throws you off, and where you want to get to.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-bg-num" aria-hidden="true">#2</span>
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><line x1="12" y1="17.5" x2="12" y2="21"/><line x1="8.5" y1="21" x2="15.5" y2="21"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="how.s2h">Practice session</h3>
+            <p data-i18n="how.s2p">We recreate the real situation — a meeting update, a presentation, a conversation in English — somewhere mistakes don't cost you anything.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-bg-num" aria-hidden="true">#3</span>
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="1.5"/><path d="M8.5 9l1.5 1.5 3-3"/><line x1="8.5" y1="14.5" x2="15.5" y2="14.5"/><line x1="8.5" y1="17" x2="13" y2="17"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="how.s3h">A plan you can act on</h3>
+            <p data-i18n="how.s3p">Concrete techniques for your specific pressure points, plus a plan for practicing them before they matter.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-bg-num" aria-hidden="true">#4</span>
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.5-5.8"/><path d="M20 12a8 8 0 0 1-13.5 5.8"/><path d="M17.5 3.5v3.2h-3.2"/><path d="M6.5 20.5v-3.2h3.2"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="how.s4h">Ongoing coaching</h3>
+            <p data-i18n="how.s4p">Regular sessions to keep building reps, using whatever's actually coming up — a talk, a pitch, a meeting — as practice, not just pressure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section section-alt reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="pricing.eyebrow">Packages</p>
+        <h2 data-i18n="pricing.h2">Find your pace</h2>
+      </div>
+      <div class="grid-3 pricing-grid">
+
+        <div class="price-card">
+          <h3 data-i18n="pricing.p1h">Warm-Up Session</h3>
+          <p class="price-tag" data-i18n="pricing.p1price">[Add price]</p>
+          <p class="price-meta" data-i18n="pricing.p1meta">1 session</p>
+          <p data-i18n="pricing.p1desc">One session to name exactly what throws you off, and leave with one concrete thing to practice.</p>
+          <ul class="price-features">
+            <li data-i18n="pricing.p1f1">75-minute 1:1 session</li>
+            <li data-i18n="pricing.p1f2">A clear picture of your specific pressure points</li>
+            <li data-i18n="pricing.p1f3">One concrete exercise to practice on your own</li>
+          </ul>
+        </div>
+
+        <div class="price-card featured">
+          <span class="price-badge" data-i18n="pricing.popular">Most popular</span>
+          <h3 data-i18n="pricing.p2h">Find Your Voice</h3>
+          <p class="price-tag" data-i18n="pricing.p2price">[Add price]</p>
+          <p class="price-meta" data-i18n="pricing.p2meta">4 sessions</p>
+          <p data-i18n="pricing.p2desc">The full process: practicing your actual scenarios until they stop feeling like performance.</p>
+          <ul class="price-features">
+            <li data-i18n="pricing.p2f1">4 sessions across 4–6 weeks</li>
+            <li data-i18n="pricing.p2f2">Practice built around your real situations, not generic scripts</li>
+            <li data-i18n="pricing.p2f3">Optional: mock presentations and conversation practice in English</li>
+            <li data-i18n="pricing.p2f4">Email support between sessions</li>
+          </ul>
+        </div>
+
+        <div class="price-card">
+          <h3 data-i18n="pricing.p3h">Stage Ready</h3>
+          <p class="price-tag" data-i18n="pricing.p3price">[Add price]</p>
+          <p class="price-meta" data-i18n="pricing.p3meta">8 sessions</p>
+          <p data-i18n="pricing.p3desc">Everything in Find Your Voice, plus ongoing practice through a real presentation, pitch, or meeting you're preparing for.</p>
+          <ul class="price-features">
+            <li data-i18n="pricing.p3f1">8 sessions across roughly 3 months</li>
+            <li data-i18n="pricing.p3f2">Everything in Find Your Voice</li>
+            <li data-i18n="pricing.p3f3">Rehearsal for a specific upcoming presentation or event</li>
+            <li data-i18n="pricing.p3f4">Ongoing support through the run-up to it</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="testimonials.eyebrow">In their words</p>
+        <h2 data-i18n="testimonials.h2">What clients say</h2>
+      </div>
+      <!-- Replace these with real client testimonials once you have them -->
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p class="testi-quote" data-i18n="testimonials.q1">"[Add a real client quote here — about the moment presenting stopped feeling terrifying.]"</p>
+          <p class="testi-attr" data-i18n="testimonials.a1">— Marketing Coordinator, on leading client presentations</p>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote" data-i18n="testimonials.q2">"[Add a real client quote here — what changed after practicing.]"</p>
+          <p class="testi-attr" data-i18n="testimonials.a2">— Software Developer, on speaking up in meetings</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section section-dark reveal">
+    <div class="wrap">
+      <div class="contact-inner">
+        <div>
+          <p class="eyebrow" data-i18n="contact.eyebrow">Get in touch</p>
+          <h2 data-i18n="contact.h2">Ready to find your voice?</h2>
+          <p style="color:rgba(255,255,255,0.82); max-width:480px;" data-i18n="contact.p">A free 20-minute call. No pitch, no pressure, no judgment — just a conversation.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:[email protected]?subject=Intro%20call" data-i18n="contact.cta">Book a free intro call</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-row">
+            <span class="contact-icon" data-i18n-aria="contact.emailLabel" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 6.5l8 6 8-6"/></svg>
+            </span>
+            <a href="mailto:[email protected]">[email protected]</a>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon" data-i18n-aria="contact.linkedinLabel" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6"/><path d="M8 12l-2 2a3 3 0 004 4l2-2"/><path d="M16 12l2-2a3 3 0 00-4-4l-2 2"/></svg>
+            </span>
+            <a href="#">linkedin.com/in/yourname</a>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon" data-i18n-aria="contact.locationLabel" aria-label="Based in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg>
+            </span>
+            <span data-i18n="contact.locationValue">Add your location</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© <span id="year"></span> Your Name — <span data-i18n="footer.tagline">Communication Coaching</span></span>
+    <span><a href="mailto:[email protected]">[email protected]</a></span>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  const navHeader = document.querySelector('header.nav');
+
+  function positionMobileMenu(){
+    navLinks.style.top = navHeader.getBoundingClientRect().bottom + 'px';
+  }
+
+  navToggle.addEventListener('click', () => {
+    positionMobileMenu();
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+  window.addEventListener('resize', () => {
+    if (navLinks.classList.contains('open')) positionMobileMenu();
+  });
+
+  // ---------- i18n ----------
+  const translations = {
+    en: {
+      meta: {
+        title: "Your Name — Find Your Voice: Public Speaking & Communication Coaching",
+        description: "Communication and public speaking coaching for people who freeze up in meetings, presentations, and everyday conversations — practice in a space with no grade attached."
+      },
+      nav: { about:"About", forYou:"Who it's for", how:"How I help", pricing:"Pricing", contact:"Contact", bookCall:"Book a call", menuLabel:"Open menu" },
+      hero: {
+        eyebrow:"Communication coaching · practice, not performance",
+        h1:"You already have a voice worth hearing.<br>You just haven't had room to <em>practice</em> it.",
+        sub:"I help people who freeze up in meetings, presentations, and everyday conversations — not because something's missing, but because the only practice most of us ever got was in a classroom, being judged and graded. Let's fix that, in a space where the only goal is to get comfortable.",
+        ctaPrimary:"Book a free intro call",
+        ctaSecondary:"See how it works"
+      },
+      card: {
+        labelOriginal:"What happens now",
+        tabsAria:"Example speaking scenarios",
+        tab1:"Team Meetings", tab2:"Presenting to a Room", tab3:"Speaking English",
+        examples:[
+          { o:"Your heart races before a two-minute update in a team meeting, so you rush through it and forget half of what you meant to say.", t:"A steady two minutes — because you rehearsed it enough times that it stopped feeling like a performance.", badge:"PRACTICED ✓", label:"What practice changes" },
+          { o:"You know the material better than anyone in the room, but the second all eyes turn to you, your mind goes blank.", t:"Presence that finally matches what you know — because the blank-mind moment gets rehearsed away, not just hoped away.", badge:"FOUND ✓", label:"What's waiting to be found" },
+          { o:"You can write a perfect email in English, but the moment you have to say it out loud in a meeting, the words won't come.", t:"Conversational fluency built through real practice — mock presentations and real conversations, not grammar drills.", badge:"UNLOCKED ✓", label:"What fluency unlocks" }
+        ]
+      },
+      forYou: {
+        eyebrow:"Sound familiar?", h2:"Who I work with",
+        c1h:"You freeze when it's your turn to talk", c1p:"In meetings, in group settings — the moment attention turns to you, your mind goes blank, even though you knew exactly what to say a minute ago.",
+        c2h:"You dread presenting", c2p:"The material is solid and you know it cold — but the thought of standing in front of a room and saying it out loud keeps you up the night before.",
+        c3h:"You know English, but freeze in English", c3p:"You can read and write it just fine. Saying it out loud, in real time, in front of others, feels like an entirely different skill."
+      },
+      about: {
+        eyebrow:"Your guide", h2:"A decade of presenting to rooms that didn't speak my language",
+        lede:"For more than ten years, I sat in rooms — with clients, with executives, with teams — explaining technical things to people with no technical background. That's its own kind of public speaking: constant, high-stakes, and with nowhere to hide.",
+        p2:"Nobody teaches you how to do that well. I learned it the way most people do — badly, awkwardly, one presentation at a time — until it stopped feeling like a performance and started feeling like a conversation. That's exactly what I help other people build now: not a script, but the comfort that only comes from real, low-stakes practice.",
+        photoPlaceholder:"Add your photo here<br>(square or 4:5, replace this box with an &lt;img&gt;)"
+      },
+      midCta: {
+        text:"<strong>Not sure yet?</strong> Book a free, 20-minute intro call — no pressure."
+      },
+      approach: {
+        eyebrow:"The approach", h2:"It was never about talent. It was about the room you practiced in.",
+        p1:"Most people's only real public speaking practice happened in a classroom — graded, judged, compared to everyone else in the room. It's no wonder the fear stuck. That's not a fair training ground for a skill you need for the rest of your working life.",
+        quote:"\"You don't need to be a natural. You need a room where it's safe to be bad at this for a while.\"",
+        p2:"That's what these sessions are: a low-stakes space to practice being seen and heard, with nothing riding on it. No grade, no audience waiting to catch a mistake — just repetition, in a room that's actually on your side.",
+        p3:"The goal isn't to turn you into a different person in front of a room. It's to make the room feel like the people you're already comfortable with."
+      },
+      how: {
+        eyebrow:"The process", h2:"How I help",
+        s1h:"Discovery call", s1p:"A free, 20-minute conversation about what specifically throws you off, and where you want to get to.",
+        s2h:"Practice session", s2p:"We recreate the real situation — a meeting update, a presentation, a conversation in English — somewhere mistakes don't cost you anything.",
+        s3h:"A plan you can act on", s3p:"Concrete techniques for your specific pressure points, plus a plan for practicing them before they matter.",
+        s4h:"Ongoing coaching", s4p:"Regular sessions to keep building reps, using whatever's actually coming up — a talk, a pitch, a meeting — as practice, not just pressure."
+      },
+      pricing: {
+        eyebrow:"Packages", h2:"Find your pace",
+        p1h:"Warm-Up Session", p1price:"[Add price]", p1meta:"1 session",
+        p1desc:"One session to name exactly what throws you off, and leave with one concrete thing to practice.",
+        p1f1:"75-minute 1:1 session", p1f2:"A clear picture of your specific pressure points", p1f3:"One concrete exercise to practice on your own",
+        popular:"Most popular",
+        p2h:"Find Your Voice", p2price:"[Add price]", p2meta:"4 sessions",
+        p2desc:"The full process: practicing your actual scenarios until they stop feeling like performance.",
+        p2f1:"4 sessions across 4–6 weeks", p2f2:"Practice built around your real situations, not generic scripts", p2f3:"Optional: mock presentations and conversation practice in English", p2f4:"Email support between sessions",
+        p3h:"Stage Ready", p3price:"[Add price]", p3meta:"8 sessions",
+        p3desc:"Everything in Find Your Voice, plus ongoing practice through a real presentation, pitch, or meeting you're preparing for.",
+        p3f1:"8 sessions across roughly 3 months", p3f2:"Everything in Find Your Voice", p3f3:"Rehearsal for a specific upcoming presentation or event", p3f4:"Ongoing support through the run-up to it"
+      },
+      testimonials: {
+        eyebrow:"In their words", h2:"What clients say",
+        q1:"\"[Add a real client quote here — about the moment presenting stopped feeling terrifying.]\"", a1:"— Marketing Coordinator, on leading client presentations",
+        q2:"\"[Add a real client quote here — what changed after practicing.]\"", a2:"— Software Developer, on speaking up in meetings"
+      },
+      contact: {
+        eyebrow:"Get in touch", h2:"Ready to find your voice?",
+        p:"A free 20-minute call. No pitch, no pressure, no judgment — just a conversation.",
+        cta:"Book a free intro call", emailLabel:"Email", linkedinLabel:"LinkedIn", locationLabel:"Based in", locationValue:"Add your location"
+      },
+      footer: { tagline:"Communication Coaching" }
+    },
+    pl: {
+      meta: {
+        title: "Twoje Imię — Znajdź Swój Głos: Coaching Komunikacji i Wystąpień Publicznych",
+        description: "Coaching komunikacji i wystąpień publicznych dla osób, które blokują się na spotkaniach, prezentacjach i w codziennych rozmowach — praktyka w miejscu bez oceniania."
+      },
+      nav: { about:"O mnie", forYou:"Dla kogo", how:"Proces", pricing:"Cennik", contact:"Kontakt", bookCall:"Umów rozmowę", menuLabel:"Otwórz menu" },
+      hero: {
+        eyebrow:"Komunikacja i wystąpienia publiczne · praktyka, nie występ",
+        h1:"Twój głos już zasługuje na to, by go usłyszeć.<br>Brakowało Ci tylko miejsca, żeby go <em>przećwiczyć</em>.",
+        sub:"Pomagam osobom, które blokują się w trakcie spotkań, prezentacji i zwykłych rozmów — nie dlatego, że czegoś im brakuje, ale dlatego, że jedyną praktykę większość z nas dostała w szkole, oceniana i porównywana z resztą klasy. Czas to zmienić — w miejscu, gdzie jedynym celem jest poczuć się swobodnie.",
+        ctaPrimary:"Umów bezpłatną rozmowę wstępną",
+        ctaSecondary:"Zobacz, jak to działa"
+      },
+      card: {
+        labelOriginal:"Jak to wygląda teraz",
+        tabsAria:"Przykładowe sytuacje związane z wystąpieniami",
+        tab1:"Spotkania zespołu", tab2:"Prezentacje na sali", tab3:"Mówienie po angielsku",
+        examples:[
+          { o:"Przyspieszone bicie serca przed dwuminutowym podsumowaniem na spotkaniu zespołu — słowa lecą za szybko, a połowa z tego, co miało paść, gdzieś ginie.", t:"Spokojne dwie minuty — bo przećwiczono je tyle razy, że przestały być występem.", badge:"PRZEĆWICZONE ✓", label:"Co zmienia praktyka" },
+          { o:"Znajomość tematu lepsza niż u kogokolwiek w sali — ale gdy wszystkie spojrzenia się odwracają, w głowie robi się pusto.", t:"Pewność siebie, która w końcu dorównuje wiedzy — bo pustkę w głowie da się wyćwiczyć na spokojnie, a nie tylko na nią liczyć.", badge:"ZNALEZIONE ✓", label:"Co czeka na odnalezienie" },
+          { o:"Idealny mail po angielsku nie problem — ale gdy trzeba to samo powiedzieć na głos na spotkaniu, słowa nagle znikają.", t:"Swoboda w mówieniu, zbudowana na prawdziwej praktyce — symulacje prezentacji i realne rozmowy, a nie ćwiczenia gramatyczne.", badge:"ODBLOKOWANE ✓", label:"Co odblokowuje swoboda mówienia" }
+        ]
+      },
+      forYou: {
+        eyebrow:"Znajome uczucie?", h2:"Z kim pracuję",
+        c1h:"Blokujesz się, kiedy przychodzi Twoja kolej", c1p:"Na spotkaniach, w grupie — w momencie, gdy uwaga przenosi się na Ciebie, w głowie robi się pusto, mimo że minutę wcześniej wszystko było jasne.",
+        c2h:"Prezentacje spędzają Ci sen z powiek", c2p:"Materiał jest solidny i znasz go na pamięć — ale sama myśl o tym, żeby stanąć przed salą i powiedzieć to na głos, wystarczy, żeby nie spać poprzedniej nocy.",
+        c3h:"Znasz angielski, ale blokujesz się, mówiąc w nim", c3p:"W piśmie radzisz sobie świetnie. Ale mówienie na głos, na żywo, przy innych ludziach, to zupełnie inna umiejętność."
+      },
+      about: {
+        eyebrow:"O mnie", h2:"Dekada prezentowania w salach, które nie mówiły moim językiem",
+        lede:"Ponad dziesięć lat spędzonych w salach — z klientami, z zarządem, z zespołami — tłumacząc techniczne rzeczy ludziom bez technicznego przygotowania. To swój własny rodzaj wystąpień publicznych: stały, z wysoką stawką i bez możliwości schowania się.",
+        p2:"Nikt nie uczy, jak robić to dobrze. Trzeba się tego nauczyć tak, jak większość ludzi się uczy — niezręcznie, prezentacja po prezentacji — aż przestaje to być występem, a zaczyna rozmową. Dokładnie to dziś pomagam budować innym: nie scenariusz, a pewność, która bierze się tylko z prawdziwej, bezpiecznej praktyki.",
+        photoPlaceholder:"Dodaj tutaj swoje zdjęcie<br>(kwadrat lub 4:5 — zastąp ten blok znacznikiem &lt;img&gt;)"
+      },
+      midCta: {
+        text:"<strong>Jeszcze się zastanawiasz?</strong> Umów bezpłatną, 20-minutową rozmowę wstępną — bez presji."
+      },
+      approach: {
+        eyebrow:"Podejście", h2:"Nigdy nie chodziło o talent. Chodziło o miejsce, w którym przyszło Ci ćwiczyć.",
+        p1:"Jedyna prawdziwa praktyka wystąpień publicznych u większości ludzi działa się w szkole — oceniana, porównywana z resztą klasy. Nic dziwnego, że ten strach został na dłużej. To niesprawiedliwe środowisko do nauki umiejętności, która przydaje się przez całe zawodowe życie.",
+        quote:"„Nie musisz być urodzonym mówcą. Potrzebujesz miejsca, w którym bezpiecznie jest być w tym słabym przez jakiś czas.”",
+        p2:"O to właśnie chodzi w tych sesjach: bezpieczna przestrzeń, żeby ćwiczyć bycie widzianym i słyszanym, bez żadnych konsekwencji. Bez oceny, bez publiczności czekającej na błąd — tylko powtarzanie, w miejscu, które naprawdę trzyma Twoją stronę.",
+        p3:"Celem nie jest zrobienie z Ciebie innej osoby przed salą. Celem jest to, żeby ta sala zaczęła przypominać ludzi, przy których już czujesz się swobodnie."
+      },
+      how: {
+        eyebrow:"Proces", h2:"Jak pomagam",
+        s1h:"Rozmowa wstępna", s1p:"Bezpłatna, 20-minutowa rozmowa o tym, co dokładnie Cię blokuje i dokąd chcesz dojść.",
+        s2h:"Sesja praktyczna", s2p:"Odtwarzamy realną sytuację — podsumowanie na spotkaniu, prezentację, rozmowę po angielsku — w miejscu, gdzie błąd nic Cię nie kosztuje.",
+        s3h:"Plan, który możesz wdrożyć", s3p:"Konkretne techniki dopasowane do Twoich punktów zapalnych, plus plan, jak je przećwiczyć, zanim zaczną się liczyć.",
+        s4h:"Stały coaching", s4p:"Regularne sesje, które budują wprawę — wykorzystując to, co naprawdę nadchodzi: wystąpienie, prezentację, spotkanie — jako praktykę, a nie tylko presję."
+      },
+      pricing: {
+        eyebrow:"Pakiety", h2:"Znajdź swoje tempo",
+        p1h:"Sesja Rozgrzewkowa", p1price:"[Uzupełnij cenę]", p1meta:"1 sesja",
+        p1desc:"Jedna sesja, żeby nazwać dokładnie to, co Cię blokuje, i wyjść z jednym konkretnym ćwiczeniem do przećwiczenia.",
+        p1f1:"75-minutowa sesja 1:1", p1f2:"Jasny obraz Twoich punktów zapalnych", p1f3:"Jedno konkretne ćwiczenie do samodzielnej pracy",
+        popular:"Najczęściej wybierany",
+        p2h:"Znajdź Swój Głos", p2price:"[Uzupełnij cenę]", p2meta:"4 sesje",
+        p2desc:"Pełny proces: ćwiczenie Twoich realnych sytuacji, aż przestaną przypominać występ.",
+        p2f1:"4 sesje w ciągu 4–6 tygodni", p2f2:"Praktyka oparta na Twoich prawdziwych sytuacjach, nie na gotowych scenariuszach", p2f3:"Opcjonalnie: symulacje prezentacji i rozmowy po angielsku", p2f4:"Wsparcie mailowe między sesjami",
+        p3h:"Gotowość Sceniczna", p3price:"[Uzupełnij cenę]", p3meta:"8 sesji",
+        p3desc:"Wszystko z pakietu Znajdź Swój Głos, plus praktyka przy konkretnej prezentacji, pitchu czy spotkaniu, do którego się przygotowujesz.",
+        p3f1:"8 sesji w ciągu około 3 miesięcy", p3f2:"Wszystko z pakietu Znajdź Swój Głos", p3f3:"Próba przed konkretnym wydarzeniem", p3f4:"Wsparcie na bieżąco w trakcie przygotowań"
+      },
+      testimonials: {
+        eyebrow:"Opinie klientów", h2:"Co mówią klienci",
+        q1:"„[Dodaj tutaj prawdziwą opinię klienta — o momencie, w którym prezentowanie przestało być przerażające.]”", a1:"— Koordynator ds. marketingu, o prowadzeniu prezentacji dla klientów",
+        q2:"„[Dodaj tutaj prawdziwą opinię klienta — co zmieniło się po treningu.]”", a2:"— Programista, o zabieraniu głosu na spotkaniach"
+      },
+      contact: {
+        eyebrow:"Skontaktuj się", h2:"Gotowy(a) znaleźć swój głos?",
+        p:"Bezpłatna, 20-minutowa rozmowa. Bez sprzedawania, bez presji, bez oceniania — po prostu rozmowa.",
+        cta:"Umów bezpłatną rozmowę wstępną", emailLabel:"E-mail", linkedinLabel:"LinkedIn", locationLabel:"Lokalizacja", locationValue:"Dodaj swoją lokalizację"
+      },
+      footer: { tagline:"Coaching komunikacji" }
+    }
+  };
+
+  function getPath(obj, path){ return path.split('.').reduce((o,k) => (o && o[k] !== undefined) ? o[k] : undefined, obj); }
+
+  let currentLang = (navigator.language || '').toLowerCase().startsWith('en') ? 'en' : 'pl';
+  let currentTabIndex = 0;
+
+  const originalEl = document.getElementById('originalText');
+  const translatedEl = document.getElementById('translatedText');
+  const stampEl = document.getElementById('stampBadge');
+  const translatedLabelEl = document.getElementById('translatedLabel');
+
+  function renderCard(){
+    const ex = translations[currentLang].card.examples[currentTabIndex];
+    originalEl.textContent = ex.o;
+    translatedEl.textContent = ex.t;
+    stampEl.textContent = ex.badge;
+    translatedLabelEl.textContent = ex.label;
+  }
+
+  function applyLanguage(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.title = translations[lang].meta.title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', translations[lang].meta.description);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = getPath(translations[lang], el.getAttribute('data-i18n'));
+      if (val !== undefined) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const val = getPath(translations[lang], el.getAttribute('data-i18n-aria'));
+      if (val !== undefined) el.setAttribute('aria-label', val);
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const isActive = btn.dataset.lang === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive);
+    });
+
+    renderCard();
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+
+  // Translate card tab switching
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentTabIndex = +tab.dataset.index;
+      renderCard();
+    });
+  });
+
+  applyLanguage(currentLang);
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
